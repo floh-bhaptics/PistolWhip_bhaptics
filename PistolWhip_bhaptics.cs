@@ -171,6 +171,7 @@ namespace PistolWhip_bhaptics
             public static void Postfix()
             {
                 tactsuitVr.PlaybackHaptics("ExplosionFace");
+                tactsuitVr.PlaybackHaptics("ExplosionFaceFeet");
             }
         }
 
@@ -209,6 +210,7 @@ namespace PistolWhip_bhaptics
                 if (justKilled)
                 {
                     tactsuitVr.PlaybackHaptics("Dying");
+                    tactsuitVr.PlaybackHaptics("DyingFeet");
                     justKilled = false;
                 }
             }
