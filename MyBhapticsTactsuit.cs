@@ -4,6 +4,9 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Resources;
+using System.Collections;
+using System.Globalization;
 using MelonLoader;
 
 namespace MyBhapticsTactsuit
@@ -13,7 +16,7 @@ namespace MyBhapticsTactsuit
         public bool suitDisabled = true;
         public bool systemInitialized = false;
         private static ManualResetEvent HeartBeat_mrse = new ManualResetEvent(false);
-        public Dictionary<String, FileInfo> FeedbackMap = new Dictionary<String, FileInfo>();
+        public Dictionary<String, String> FeedbackMap = new Dictionary<String, String>();
 
         private static bHaptics.RotationOption defaultRotationOption = new bHaptics.RotationOption(0.0f, 0.0f);
 
@@ -49,6 +52,7 @@ namespace MyBhapticsTactsuit
 
         void RegisterAllTactFiles()
         {
+            /*
             string configPath = Directory.GetCurrentDirectory() + "\\Mods\\bHaptics";
             DirectoryInfo d = new DirectoryInfo(configPath);
             FileInfo[] Files = d.GetFiles("*.tact", SearchOption.AllDirectories);
@@ -64,12 +68,28 @@ namespace MyBhapticsTactsuit
                 try
                 {
                     bHaptics.RegisterFeedbackFromTactFile(prefix, tactFileStr);
+                    //bHaptics.RegisterFeedback(prefix, tactFileStr);
                     LOG("Pattern registered: " + prefix);
                 }
                 catch (Exception e) { LOG(e.ToString()); }
 
                 FeedbackMap.Add(prefix, Files[i]);
             }
+            */
+            ResourceSet resourceSet = PistolWhip_bhaptics.Resources.ResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
+
+            foreach (DictionaryEntry d in resourceSet)
+            {
+                try
+                {
+                    bHaptics.RegisterFeedbackFromTactFile(d.Key.ToString(), d.Value.ToString());
+                    LOG("Pattern registered: " + d.Key.ToString());
+                }
+                catch (Exception e) { LOG(e.ToString()); }
+
+                FeedbackMap.Add(d.Key.ToString(), d.Value.ToString());
+            }
+
             systemInitialized = true;
             //PlaybackHaptics("HeartBeat");
         }

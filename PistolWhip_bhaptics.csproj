@@ -60,6 +60,46 @@
     <Compile Include="MyBhapticsTactsuit.cs" />
     <Compile Include="PistolWhip_bhaptics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bHaptics\Dying.tact" />
+    <None Include="bHaptics\DyingFeet.tact" />
+    <None Include="bHaptics\ExplosionFace.tact" />
+    <None Include="bHaptics\ExplosionFaceFeet.tact" />
+    <None Include="bHaptics\ExplosionUp.tact" />
+    <None Include="bHaptics\ExplosionUpFeet.tact" />
+    <None Include="bHaptics\HeadShotVest.tact" />
+    <None Include="bHaptics\Healing.tact" />
+    <None Include="bHaptics\HeartBeat.tact" />
+    <None Include="bHaptics\HitInTheFace.tact" />
+    <None Include="bHaptics\Impact.tact" />
+    <None Include="bHaptics\RecoilHands_L.tact" />
+    <None Include="bHaptics\RecoilHands_R.tact" />
+    <None Include="bHaptics\RecoilMeleeVest_L.tact" />
+    <None Include="bHaptics\RecoilMeleeVest_R.tact" />
+    <None Include="bHaptics\RecoilShotgunVest_L.tact" />
+    <None Include="bHaptics\RecoilShotgunVest_R.tact" />
+    <None Include="bHaptics\RecoilVest_L.tact" />
+    <None Include="bHaptics\RecoilVest_R.tact" />
+    <None Include="bHaptics\Recoil_L.tact" />
+    <None Include="bHaptics\Recoil_R.tact" />
+    <None Include="bHaptics\ReloadHip_L.tact" />
+    <None Include="bHaptics\ReloadHip_R.tact" />
+    <None Include="bHaptics\ReloadShoulder_L.tact" />
+    <None Include="bHaptics\ReloadShoulder_R.tact" />
+    <None Include="bHaptics\Reload_L.tact" />
+    <None Include="bHaptics\Reload_R.tact" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
