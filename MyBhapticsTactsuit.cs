@@ -9,14 +9,18 @@ using System.Collections;
 using System.Globalization;
 using MelonLoader;
 
+using OWO;
+
 namespace MyBhapticsTactsuit
 {
     public class TactsuitVR
     {
         public bool suitDisabled = true;
+        public bool owoEnabled = true;
         public bool systemInitialized = false;
         private static ManualResetEvent HeartBeat_mrse = new ManualResetEvent(false);
         public Dictionary<String, String> FeedbackMap = new Dictionary<String, String>();
+        public static OWOController owoController = new OWOController();
 
         private static bHaptics.RotationOption defaultRotationOption = new bHaptics.RotationOption(0.0f, 0.0f);
 
@@ -26,6 +30,7 @@ namespace MyBhapticsTactsuit
             {
                 HeartBeat_mrse.WaitOne();
                 bHaptics.SubmitRegistered("HeartBeat");
+                owoController.SendSensation(SensationId.HeartBeat, OWOMuscle.Pectoral_L);
                 Thread.Sleep(1000);
             }
         }
@@ -41,6 +46,12 @@ namespace MyBhapticsTactsuit
             LOG("Starting HeartBeat thread...");
             Thread HeartBeatThread = new Thread(HeartBeatFunc);
             HeartBeatThread.Start();
+            owoController.FindServersInLANAndConnect();
+            if (owoController.IsConnected)
+            {
+                owoEnabled = true;
+                LOG("OWO suit connected.");
+            }
         }
 
         public void LOG(string logStr)
@@ -121,6 +132,8 @@ namespace MyBhapticsTactsuit
             bHaptics.SubmitRegistered(keyHands, keyHands, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyArm, keyArm, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyVest, keyVest, scaleOption, rotationFront);
+            if (isRightHand) owoController.SendSensationWithPercentage(SensationId.GunRecoil, OWOMuscle.Arm_R, 60);
+            else owoController.SendSensationWithPercentage(SensationId.GunRecoil, OWOMuscle.Arm_L, 60);
         }
         public void ShotgunRecoil(bool isRightHand, float intensity = 1.0f)
         {
@@ -135,6 +148,8 @@ namespace MyBhapticsTactsuit
             bHaptics.SubmitRegistered(keyHands, keyHands, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyArm, keyArm, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyVest, keyVest, scaleOption, rotationFront);
+            if (isRightHand) owoController.SendSensationWithPercentage(SensationId.GunRecoil, OWOMuscle.Arm_R, 100);
+            else owoController.SendSensationWithPercentage(SensationId.GunRecoil, OWOMuscle.Arm_L, 100);
         }
         public void MeleeRecoil(bool isRightHand, float intensity = 1.0f)
         {
@@ -149,6 +164,8 @@ namespace MyBhapticsTactsuit
             bHaptics.SubmitRegistered(keyHands, keyHands, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyArm, keyArm, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyVest, keyVest, scaleOption, rotationFront);
+            if (isRightHand) owoController.SendSensationWithPercentage(SensationId.GunRecoil, OWOMuscle.Arm_R, 80);
+            else owoController.SendSensationWithPercentage(SensationId.GunRecoil, OWOMuscle.Arm_L, 80);
         }
         public void GunReload(bool isRightHand, bool reloadHip, bool reloadShoulder, bool reloadTrigger, float intensity = 1.0f)
         {
@@ -172,6 +189,7 @@ namespace MyBhapticsTactsuit
         {
             if (bHaptics.IsDeviceConnected(bHaptics.DeviceType.Tactal)) { PlaybackHaptics("HitInTheFace"); }
             else { PlaybackHaptics("HeadShotVest"); }
+            owoController.SendSensation(SensationId.Shot, OWOMuscle.Pectoral_R);
         }
 
         public void StartHeartBeat()
