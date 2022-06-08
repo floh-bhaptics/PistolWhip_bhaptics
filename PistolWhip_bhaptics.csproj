@@ -39,8 +39,9 @@
       <HintPath>D:\Games\Oculus\Software\cloudhead-games-ltd-pistol-whip\MelonLoader\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="OWO">
-      <HintPath>OWO\OWO.dll</HintPath>
+    <Reference Include="OWO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\OWO_SDK\OWO.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
