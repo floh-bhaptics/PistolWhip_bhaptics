@@ -9,7 +9,7 @@ using System.Collections;
 using System.Globalization;
 using MelonLoader;
 
-//using OWO;
+using OWOHaptic;
 
 namespace MyBhapticsTactsuit
 {
@@ -30,7 +30,7 @@ namespace MyBhapticsTactsuit
             {
                 HeartBeat_mrse.WaitOne();
                 bHaptics.SubmitRegistered("HeartBeat");
-                OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.HeartBeat, OWOHaptic.OWOMuscle.Pectoral_Left);
+                //OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.HeartBeat, OWOHaptic.OWOMuscle.Pectoral_Left);
                 Thread.Sleep(1000);
             }
         }
@@ -46,9 +46,12 @@ namespace MyBhapticsTactsuit
             LOG("Starting HeartBeat thread...");
             Thread HeartBeatThread = new Thread(HeartBeatFunc);
             HeartBeatThread.Start();
-            OWOHaptic.OWO.AutoConnect();
-            //owoController.FindServersInLANAndConnect();
-            if (OWOHaptic.OWO.IsConnected)
+            
+            OWO.AutoConnect();
+            //OWO.Connect("192.168.1.238");
+            Thread.Sleep(1000);
+            OWO.Send(OWOSensation.HeartBeat, OWOMuscle.Pectoral_Left);
+            if (OWO.IsConnected)
             {
                 owoEnabled = true;
                 LOG("OWO suit connected.");
@@ -133,8 +136,8 @@ namespace MyBhapticsTactsuit
             bHaptics.SubmitRegistered(keyHands, keyHands, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyArm, keyArm, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyVest, keyVest, scaleOption, rotationFront);
-            if (isRightHand) OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Right);
-            else OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Left);
+            //if (isRightHand) OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Right);
+            //else OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Left);
         }
         public void ShotgunRecoil(bool isRightHand, float intensity = 1.0f)
         {
@@ -149,8 +152,8 @@ namespace MyBhapticsTactsuit
             bHaptics.SubmitRegistered(keyHands, keyHands, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyArm, keyArm, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyVest, keyVest, scaleOption, rotationFront);
-            if (isRightHand) OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Right);
-            else OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Left);
+            //if (isRightHand) OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Right);
+            //else OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Left);
         }
         public void MeleeRecoil(bool isRightHand, float intensity = 1.0f)
         {
@@ -165,8 +168,8 @@ namespace MyBhapticsTactsuit
             bHaptics.SubmitRegistered(keyHands, keyHands, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyArm, keyArm, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyVest, keyVest, scaleOption, rotationFront);
-            if (isRightHand) OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Right);
-            else OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Left);
+            //if (isRightHand) OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Right);
+            //else OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.GunRecoil, OWOHaptic.OWOMuscle.Arm_Left);
         }
         public void GunReload(bool isRightHand, bool reloadHip, bool reloadShoulder, bool reloadTrigger, float intensity = 1.0f)
         {
@@ -190,7 +193,7 @@ namespace MyBhapticsTactsuit
         {
             if (bHaptics.IsDeviceConnected(bHaptics.DeviceType.Tactal)) { PlaybackHaptics("HitInTheFace"); }
             else { PlaybackHaptics("HeadShotVest"); }
-            OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.Shot, OWOHaptic.OWOMuscle.Pectorals);
+            //OWOHaptic.OWO.Send(OWOHaptic.OWOSensation.Shot, OWOHaptic.OWOMuscle.Pectorals);
         }
 
         public void StartHeartBeat()
