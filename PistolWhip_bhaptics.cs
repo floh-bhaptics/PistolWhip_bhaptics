@@ -28,6 +28,7 @@ namespace PistolWhip_bhaptics
         {
             base.OnApplicationStart();
             tactsuitVr = new TactsuitVR();
+            //System.Threading.Thread.Sleep(1000);
             tactsuitVr.PlaybackHaptics("HeartBeat");
         }
 
