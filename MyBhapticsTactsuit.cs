@@ -9,7 +9,6 @@ using System.Collections;
 using System.Globalization;
 using MelonLoader;
 
-using OWO;
 
 namespace MyBhapticsTactsuit
 {
@@ -30,7 +29,6 @@ namespace MyBhapticsTactsuit
             {
                 HeartBeat_mrse.WaitOne();
                 bHaptics.SubmitRegistered("HeartBeat");
-                OWOController.Send(OWOSensation.Ball, OWOMuscle.Pectoral_L);
                 Thread.Sleep(1000);
             }
         }
@@ -46,13 +44,6 @@ namespace MyBhapticsTactsuit
             LOG("Starting HeartBeat thread...");
             Thread HeartBeatThread = new Thread(HeartBeatFunc);
             HeartBeatThread.Start();
-            OWOController.AutoConnect();
-            //owoController.FindServersInLANAndConnect();
-            if (OWOController.IsConnected)
-            {
-                owoEnabled = true;
-                LOG("OWO suit connected.");
-            }
         }
 
         public void LOG(string logStr)
@@ -133,8 +124,6 @@ namespace MyBhapticsTactsuit
             bHaptics.SubmitRegistered(keyHands, keyHands, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyArm, keyArm, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyVest, keyVest, scaleOption, rotationFront);
-            if (isRightHand) OWOController.Send(OWOSensation.Punch, OWOMuscle.Arm_R);
-            else OWOController.Send(OWOSensation.Punch, OWOMuscle.Arm_L);
         }
         public void ShotgunRecoil(bool isRightHand, float intensity = 1.0f)
         {
@@ -149,8 +138,6 @@ namespace MyBhapticsTactsuit
             bHaptics.SubmitRegistered(keyHands, keyHands, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyArm, keyArm, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyVest, keyVest, scaleOption, rotationFront);
-            if (isRightHand) OWOController.Send(OWOSensation.Punch, OWOMuscle.Arm_R);
-            else OWOController.Send(OWOSensation.Punch, OWOMuscle.Arm_L);
         }
         public void MeleeRecoil(bool isRightHand, float intensity = 1.0f)
         {
@@ -165,8 +152,6 @@ namespace MyBhapticsTactsuit
             bHaptics.SubmitRegistered(keyHands, keyHands, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyArm, keyArm, scaleOption, rotationFront);
             bHaptics.SubmitRegistered(keyVest, keyVest, scaleOption, rotationFront);
-            if (isRightHand) OWOController.Send(OWOSensation.Punch, OWOMuscle.Arm_R);
-            else OWOController.Send(OWOSensation.Punch, OWOMuscle.Arm_L);
         }
         public void GunReload(bool isRightHand, bool reloadHip, bool reloadShoulder, bool reloadTrigger, float intensity = 1.0f)
         {
@@ -190,7 +175,6 @@ namespace MyBhapticsTactsuit
         {
             if (bHaptics.IsDeviceConnected(bHaptics.DeviceType.Tactal)) { PlaybackHaptics("HitInTheFace"); }
             else { PlaybackHaptics("HeadShotVest"); }
-            OWOController.Send(OWOSensation.ShotEntry, OWOMuscle.FrontMuscles);
         }
 
         public void StartHeartBeat()
