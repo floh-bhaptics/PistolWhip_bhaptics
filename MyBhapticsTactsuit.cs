@@ -49,7 +49,7 @@ namespace MyBhapticsTactsuit
             
             OWO.AutoConnect();
             //OWO.Connect("192.168.1.238");
-            Thread.Sleep(100);
+            //Thread.Sleep(100);
             if (OWO.IsConnected)
             {
                 owoEnabled = true;
