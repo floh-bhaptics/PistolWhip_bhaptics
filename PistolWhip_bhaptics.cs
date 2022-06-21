@@ -191,7 +191,7 @@ namespace PistolWhip_bhaptics
             }
         }
 
-        [HarmonyPatch(typeof(PlayerHUD), "OnArmorGained")]
+        [HarmonyPatch(typeof(PlayerHUD), "playArmorGainedEffect")]
         public class bhaptics_GainArmor
         {
             [HarmonyPostfix]
