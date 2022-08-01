@@ -79,9 +79,10 @@ namespace MyBhapticsTactsuit
                 FeedbackMap.Add(prefix, Files[i]);
             }
             */
-            ResourceSet resourceSet = PistolWhip_bhaptics.Resources.ResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
+            //ResourceSet resourceSet = PistolWhip_bhaptics.Resources.ResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
+            ResourceSet resourceSetAlex = PistolWhip_bhaptics.Resources_AlexL.ResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
 
-            foreach (DictionaryEntry d in resourceSet)
+            foreach (DictionaryEntry d in resourceSetAlex)
             {
                 try
                 {
