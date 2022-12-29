@@ -7,8 +7,11 @@ using UnityEngine;
 
 using MelonLoader;
 using HarmonyLib;
-
+using Il2Cpp;
 using MyBhapticsTactsuit;
+
+[assembly: MelonInfo(typeof(PistolWhip_bhaptics.PistolWhip_bhaptics), "PistolWhip_bhaptics", "1.5.0", "Florian Fahrenberger")]
+[assembly: MelonGame("Cloudhead Games, Ltd.", "Pistol Whip")]
 
 
 
@@ -24,9 +27,9 @@ namespace PistolWhip_bhaptics
         public static bool reloadTrigger = false;
         public static bool justKilled = false;
 
-        public override void OnApplicationStart()
+        public override void OnInitializeMelon()
         {
-            base.OnApplicationStart();
+            //base.OnApplicationStart();
             tactsuitVr = new TactsuitVR();
             tactsuitVr.PlaybackHaptics("HeartBeat");
         }
